@@ -15,7 +15,12 @@ class Book(models.Model):
     author = models.ForeignKey(Author, related_name='books', on_delete=models.CASCADE)
     # Relacionamento "muitos-para-muitos" será demonstrado com tags
     tags = models.ManyToManyField('Tag', related_name='books')
+    # summary_length = models.IntegerField(blank=True, null=True)
 
+    def save(self, *args, **kwargs):
+        self.summary_length = len(self.summary)
+        super().save(*args, **kwargs)
+        
     def __str__(self):
         return self.title
 

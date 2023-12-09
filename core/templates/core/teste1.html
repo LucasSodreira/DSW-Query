@@ -1,33 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Query Examples</title>
 </head>
 <body>
     <h1>Query Examples</h1>
 
-    <h2>Books by Title</h2>
-    {% for book in books_by_title %}
-        <p>{{ book.title }}</p>
-    {% endfor %}
+    <h2>Livros de um Autor</h2>
+    <ul>
+        {% for book in books_of_author %}
+            <li>{{ book.title }}</li>
+        {% endfor %}
+    </ul>
 
-    <h2>Authors by Name</h2>
-    {% for author in authors_by_name %}
-        <p>{{ author.name }}</p>
-    {% endfor %}
+    <h2>Livros com uma Tag</h2>
+    <ul>
+        {% for book in books_with_tag %}
+            <li>{{ book.title }}</li>
+        {% endfor %}
+    </ul>
 
-    <h2>Books with Specific Tag</h2>
-    {% for book in books_with_tag %}
-        <p>{{ book.title }}</p>
-    {% endfor %}
+    <h2>Autores com Biografia Contendo "Lorem"</h2>
+    <ul>
+        {% for author in bio_author %}
+            <li>{{ author.name }}</li>
+        {% endfor %}
+    </ul>
 
-    <h2>Books of a Specific Author</h2>
-    {% for book in books_of_author %}
-        <p>{{ book.title }}</p>
-    {% endfor %}
+    <h2>Livros com Avaliação Alta</h2>
+    <ul>
+        {% for review in book_ratinge %}
+            <li>{{ review.book.title }} (rating: {{ review.rating }})</li>
+        {% endfor %}
+    </ul>
 
-    <h2>Number of Books by a Specific Author</h2>
-    <p>{{ num_books_of_author }}</p>
+    <h2>Perfis com Website específico</h2>
+    <ul>
+        {% for profile in user_website %}
+            <li>{{ profile.user.username }} (website: {{ profile.website }})</li>
+        {% endfor %}
+    </ul>
 
+    <h2>Livros sem Avaliação</h2>
+    {% if book_rating_null %}
+        <ul>
+            {% for book in book_rating_null %}
+                <li>{{ book.title }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum livro encontrado sem avaliação.</p>
+    {% endif %}
+
+    <h2>Autores com Maior Número de Livros</h2>
+    <ol>
+        {% for author in authors %}
+            <li>{{ author.name }} ({{ author.num_books }} livros)</li>
+        {% endfor %}
+    </ol>
+
+    <h2>Livros com Resumos Longos</h2>
+    <ul>
+        {% for book in books %}
+            <li>{{ book.title }} (resumo: {{ book.summary_len }} palavras)</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Avaliações de Livros de J.K. Rowling</h2>
+    <ul>
+        {% for review in reviews %}
+            <li>{{ review.book.title }} (rating: {{ review.rating }} - by {{ review.review_text }})</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Livros com Tags 1, 2 e 3</h2>
+    <ul>
+        {% for book in livros_com_tags %}
+            <li>{{ book.title }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
